@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark-blue: #0d1b2a;
+            --color-blue: #1b263b;
+            --color-mid-blue: #415a77;
+            --color-light-blue: #778da9;
+            --color-white: #ffffff;
+            --color-bg: #f5f7fa;
+            --color-grey: #e0e1dd;
+            --color-text: #333;
+            --color-success: #2a9d8f;
+            --color-warning: #e9c46a;
+            --color-danger: #e76f51;
+            --font-header: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            display: flex;
+            min-height: 100vh;
+            font-size: 16px;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: var(--color-dark-blue);
+            color: var(--color-white);
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease;
+        }
+        .sidebar-header {
+            font-family: var(--font-header);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--color-white);
+        }
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            text-decoration: none;
+            color: var(--color-light-blue);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background-color: var(--color-blue);
+            color: var(--color-white);
+        }
+        .sidebar-nav a .material-icons-sharp {
+            font-size: 1.5rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            margin-left: 250px;
+            padding: 2rem 3rem;
+            transition: margin-left 0.3s ease;
+        }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .page-header h1 {
+            font-family: var(--font-header);
+            font-size: 2.5rem;
+            color: var(--color-dark-blue);
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-primary {
+            background-color: var(--color-mid-blue);
+            color: var(--color-white);
+        }
+        .btn-primary:hover {
+            background-color: var(--color-blue);
+        }
+        .btn-danger {
+            background-color: var(--color-danger);
+            color: var(--color-white);
+        }
+        .btn-danger:hover {
+            opacity: 0.8;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background-color: var(--color-white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .card-header h3 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--color-mid-blue);
+        }
+        .card-body h2 {
+            font-family: var(--font-body);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-dark-blue);
+        }
+        .card-body .change {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+        .change.positive { color: var(--color-success); }
+        .change.negative { color: var(--color-danger); }
+        .card.full-width {
+            grid-column: 1 / -1;
+        }
+        .alert-list .alert-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--color-grey);
+            flex-wrap: wrap;
+        }
+        .alert-list .alert-item:last-child {
+            border-bottom: none;
+        }
+        .alert-item .name { font-weight: 600; }
+        .alert-item .value { font-weight: 500; padding: 0.25rem 0.5rem; border-radius: 6px; }
+        .alert-item .value.low { background-color: #fef2f2; color: #b91c1c; }
+        .alert-item .value.expiring { background-color: #fffbeb; color: #b45309; }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .data-table th, .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-grey);
+            white-space: nowrap;
+        }
+        .data-table th {
+            font-weight: 600;
+            color: var(--color-mid-blue);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        .data-table tr:hover {
+            background-color: var(--color-bg);
+        }
+        .data-table .actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .data-table .actions .btn {
+            padding: 0.5rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: var(--color-white);
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .modal-header h2 {
+            font-family: var(--font-header);
+            font-size: 1.8rem;
+            color: var(--color-dark-blue);
+        }
+        .close-modal {
+            font-size: 2rem;
+            color: var(--color-mid-blue);
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-mid-blue);
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--color-grey);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--font-body);
+        }
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .form-row .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        #invoice-items-container .invoice-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        #invoice-items-container .invoice-item .form-group {
+            margin-bottom: 0;
+            flex: 1;
+            min-width: 150px;
+        }
+        #invoice-items-container .item-name { flex: 3; }
+        #invoice-items-container .item-qty { flex: 1; }
+        .btn-sm {
+            padding: 0.5rem;
+            font-size: 0.8rem;
+        }
+        .notification {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .notification.success { background-color: var(--color-success); color: var(--color-white); }
+        .notification.error { background-color: var(--color-danger); color: var(--color-white); }
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-dark-blue);
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 10;
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            .hamburger {
+                display: block;
+            }
+            .page-header {
+                gap: 1rem;
+            }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .modal-content {
+                margin: 5% auto;
+                width: 95%;
+                padding: 1.5rem;
+            }
+            .data-table th, .data-table td {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Detail Modal (if any) -->
+    {% if detail_record %}
+    <div id="detail-modal" class="modal" style="display:block;">
+        <div class="modal-content">
+            <div class="modal-header">
+                {% if detail_type == 'invoice' %}
+                    <h2>Invoice Details</h2>
+                {% elif detail_type == 'stock' %}
+                    <h2>Stock Item Details</h2>
+                {% elif detail_type == 'customer' %}
+                    <h2>Customer Details</h2>
+                {% endif %}
+                <button class="close-modal" onclick="document.getElementById('detail-modal').style.display='none';">&times;</button>
+            </div>
+            <div style="line-height:1.6;">
+                {% if detail_type == 'invoice' %}
+                    <p><strong>Invoice ID:</strong> {{ detail_record.id }}</p>
+                    <p><strong>Date:</strong> {{ detail_record.date }}</p>
+                    <p><strong>Customer:</strong> {{ detail_record.customer_name }} ({{ detail_record.customer_phone }})</p>
+                    {% if detail_record.customer_age %}
+                        <p><strong>Age:</strong> {{ detail_record.customer_age }}</p>
+                    {% endif %}
+                    <h3 style="margin-top:1.2rem;">Items</h3>
+                    <ul style="padding-left:1.2rem;">
+                        {% for item in detail_record.items %}
+                            <li>{{ item.name }} × {{ item.quantity }} @ ${{ "%.2f"|format(item.price_per_unit) }} = ${{ "%.2f"|format(item.total) }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid #eee;">
+                        <p><strong>Subtotal:</strong> ${{ "%.2f"|format(detail_record.sub_total) }}</p>
+                        <p><strong>Discount:</strong> ${{ "%.2f"|format(detail_record.discount) }}</p>
+                        <p><strong>Tax ({{ detail_record.tax }}%):</strong> ${{ "%.2f"|format(detail_record.tax_amount) }}</p>
+                        <p><strong>Grand Total:</strong> <strong style="color:#e76f51;">${{ "%.2f"|format(detail_record.grand_total) }}</strong></p>
+                        <p><strong>Profit:</strong> <span style="color:{% if detail_record.profit >= 0 %}#2a9d8f{% else %}#e76f51{% endif %};">${{ "%.2f"|format(detail_record.profit) }}</span></p>
+                    </div>
+                {% elif detail_type == 'stock' %}
+                    <p><strong>Item Name:</strong> {{ detail_record.name }}</p>
+                    <p><strong>Current Quantity:</strong> {{ detail_record.quantity }}</p>
+                    <p><strong>Purchase Cost (per unit):</strong> ${{ "%.2f"|format(detail_record.purchase_cost) }}</p>
+                    <p><strong>Sale Price (per unit):</strong> ${{ "%.2f"|format(detail_record.price_per_unit) }}</p>
+                    <p><strong>Expiry Date:</strong> {{ detail_record.expiry if detail_record.expiry else "N/A" }}</p>
+                {% elif detail_type == 'customer' %}
+                    <p><strong>Name:</strong> {{ detail_record.name }}</p>
+                    <p><strong>Phone:</strong> {{ detail_record.phone }}</p>
+                    <p><strong>Age:</strong> {{ detail_record.age if detail_record.age else "Not provided" }}</p>
+                    <p><strong>Total Orders:</strong> {{ detail_record.order_count }}</p>
+                    <p><strong>Total Spent:</strong> ${{ "%.2f"|format(detail_record.total_spent) }}</p>
+                    {% if detail_record.history %}
+                        <h3 style="margin-top:1.2rem;">Recent Invoices</h3>
+                        <ul style="padding-left:1.2rem;">
+                            {% set recent = detail_record.history[-3:] | reverse %}
+                            {% for invId in recent %}
+                                <li>{{ invId }}</li>
+                            {% endfor %}
+                            {% if detail_record.history | length > 3 %}
+                                <li style="color:#778da9;">+ {{ (detail_record.history | length) - 3 }} more</li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <button class="btn btn-primary" onclick="document.getElementById('detail-modal').style.display='none';" style="margin-top:1.5rem;">Close</button>
+        </div>
+    </div>
+    {% endif %}
+
+    <nav class="sidebar" id="sidebar">
+        <h2 class="sidebar-header">Pharma.</h2>
+        <ul class="sidebar-nav">
+            <li>
+                <a href="?view=dashboard" class="{{ 'active' if view == 'dashboard' else '' }}">
+                    <span class="material-icons-sharp">dashboard</span>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="?view=invoices" class="{{ 'active' if view == 'invoices' else '' }}">
+                    <span class="material-icons-sharp">receipt_long</span>
+                    Invoices
+                </a>
+            </li>
+            <li>
+                <a href="?view=inventory" class="{{ 'active' if view == 'inventory' else '' }}">
+                    <span class="material-icons-sharp">inventory_2</span>
+                    Stock
+                </a>
+            </li>
+            <li>
+                <a href="?view=expenses" class="{{ 'active' if view == 'expenses' else '' }}">
+                    <span class="material-icons-sharp">account_balance_wallet</span>
+                    Expenses
+                </a>
+            </li>
+            <li>
+                <a href="?view=customers" class="{{ 'active' if view == 'customers' else '' }}">
+                    <span class="material-icons-sharp">people</span>
+                    Customers
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+
+        {% if view == 'dashboard' %}
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <button class="hamburger" id="menu-toggle"><span class="material-icons-sharp">menu</span></button>
+            </div>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-header"><h3>Total Revenue (30 Days)</h3></div>
+                    <div class="card-body">
+                        <h2>${{ "%.2f"|format(dashboard_data.total_revenue) }}</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3>Profit / Loss (30 Days)</h3></div>
+                    <div class="card-body">
+                        <h2 class="{% if dashboard_data.profit >= 0 %}positive{% else %}negative{% endif %}">
+                            ${{ "%.2f"|format(dashboard_data.profit) }}
+                        </h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3>Misc. Expenses (30 Days)</h3></div>
+                    <div class="card-body">
+                        <h2>${{ "%.2f"|format(dashboard_data.misc_expenditure) }}</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3>Total Stock Value</h3></div>
+                    <div class="card-body">
+                        <h2>${{ "%.2f"|format(dashboard_data.total_purchase_cost) }}</h2>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <div class="card-header"><h3>Sales (Last 7 Days)</h3></div>
+                    <div class="card-body">
+                        <canvas id="salesChart" style="height: 200px;"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3>Quick Alerts</h3></div>
+                    <div class="card-body alert-list">
+                        {% if dashboard_data.low_stock %}
+                            {% for item in dashboard_data.low_stock %}
+                                <div class="alert-item">
+                                    <span class="name">{{ item.name }}</span>
+                                    <span class="value low">Low Stock ({{ item.quantity }})</span>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No low stock alerts.</p>
+                        {% endif %}
+                        {% if dashboard_data.expiring_soon %}
+                            {% for item in dashboard_data.expiring_soon %}
+                                <div class="alert-item">
+                                    <span class="name">{{ item.name }}</span>
+                                    <span class="value expiring">Expires {{ item.expiry }}</span>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="margin-top: 1rem;">No items expiring soon.</p>
+                        {% endif %}
+                    </div>
+                </div><div class="card-body alert-list">
+    {% if dashboard_data.item_sales %}
+        {% set top_items = dashboard_data.item_sales.items() | list | selectattr(1, 'gt', 0) | list | sort(attribute='1', reverse=true) %}
+        {% for name, qty in top_items[:5] %}
+            <div class="alert-item">
+                <span class="name">{{ name }}</span>
+                <span class="value">{{ qty }} Sold</span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No sales data yet.</p>
+    {% endif %}
+</div>
+                <div class="card">
+                    <div class="card-header"><h3>Predictive Analytics</h3></div>
+                    <div class="card-body">
+                        <div style="margin-bottom:1rem;">
+                            <strong>Projected Sales (Next 7 Days):</strong><br/>
+                            <span style="font-size:1.2rem;">${{ "%.2f"|format(dashboard_data.predicted_next_week_sales) }}</span>
+                        </div>
+                        <div>
+                            <strong>Items at Risk of Stock-Out (Next 14 Days):</strong><br/>
+                            {% if dashboard_data.predicted_low_stock_items %}
+                                <ul style="padding-left:1.2rem; margin-top:0.5rem;">
+                                    {% for item in dashboard_data.predicted_low_stock_items %}
+                                        <li>{{ item.name }} ({{ item.days_until_empty }} days left)</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <span>No items predicted to run low.</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h3>Recent Invoices</h3>
+                        <a href="?view=invoices" class="btn btn-primary" style="padding: 0.5rem 1rem;">View All</a>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Invoice ID</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% set recent_invoices = invoices | sort(attribute='date', reverse=True) | list %}
+                                {% if recent_invoices %}
+                                    {% for invoice in recent_invoices[:5] %}
+                                    <tr>
+                                        <td>{{ invoice.id }}</td>
+                                        <td>{{ invoice.customer_name }}</td>
+                                        <td>{{ invoice.date }}</td>
+                                        <td>${{ "%.2f"|format(invoice.grand_total) }}</td>
+                                        <td class="actions">
+                                            <a href="?detail=invoice&id={{ invoice.id }}" class="btn btn-primary btn-sm">View</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr><td colspan="5" style="text-align: center;">No invoices found.</td></tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if view == 'inventory' %}
+            <div class="page-header">
+                <h1>Stock / Inventory</h1>
+                <div>
+                    <a href="?export=inventory" class="btn btn-primary" style="background-color: var(--color-success);">
+                        <span class="material-icons-sharp">download</span> Export CSV
+                    </a>
+                    <button class="btn btn-primary" data-modal-target="#addStockModal">
+                        <span class="material-icons-sharp">add</span> Add Stock
+                    </button>
+                </div>
+            </div>
+            <div class="card full-width">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Purchase Cost (Unit)</th>
+                            <th>Sale Price (Unit)</th>
+                            <th>Expiry Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if inventory %}
+                            {% for item in inventory %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ "%.2f"|format(item.purchase_cost) }}</td>
+                                <td>${{ "%.2f"|format(item.price_per_unit) }}</td>
+                                <td>{{ item.expiry }}</td>
+                                <td class="actions">
+                                    <a href="?detail=stock&id={{ item.id }}" class="btn btn-primary btn-sm">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr><td colspan="6" style="text-align: center;">No stock items found.</td></tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+        {% if view == 'invoices' %}
+            <div class="page-header">
+                <h1>Invoices</h1>
+                <div>
+                    <a href="?export=sales" class="btn btn-primary" style="background-color: var(--color-success);">
+                        <span class="material-icons-sharp">download</span> Export Sales CSV
+                    </a>
+                    <button class="btn btn-primary" data-modal-target="#addInvoiceModal">
+                        <span class="material-icons-sharp">add</span> Create Invoice
+                    </button>
+                </div>
+            </div>
+            <div class="card full-width">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Total</th>
+                            <th>Profit</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if invoices %}
+                            {% for invoice in invoices | sort(attribute='date', reverse=True) %}
+                            <tr>
+                                <td>{{ invoice.id }}</td>
+                                <td>{{ invoice.date }}</td>
+                                <td>{{ invoice.customer_name }}</td>
+                                <td>${{ "%.2f"|format(invoice.grand_total) }}</td>
+                                <td class="{% if invoice.profit >= 0 %}positive{% else %}negative{% endif %}">
+                                    ${{ "%.2f"|format(invoice.profit) }}
+                                </td>
+                                <td class="actions">
+                                    <a href="?detail=invoice&id={{ invoice.id }}" class="btn btn-primary btn-sm">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr><td colspan="6" style="text-align: center;">No invoices found.</td></tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+        {% if view == 'expenses' %}
+            <div class="page-header">
+                <h1>Expenses</h1>
+                <div>
+                     <a href="?export=financial" class="btn btn-primary" style="background-color: var(--color-success);">
+                        <span class="material-icons-sharp">download</span> Export CSV
+                    </a>
+                    <button class="btn btn-primary" data-modal-target="#addExpenseModal">
+                        <span class="material-icons-sharp">add</span> Add Expense
+                    </button>
+                </div>
+            </div>
+            <div class="card full-width">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Expense Name</th>
+                            <th>Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if expenses %}
+                            {% for expense in expenses | sort(attribute='date', reverse=True) %}
+                            <tr>
+                                <td>{{ expense.date }}</td>
+                                <td>{{ expense.name }}</td>
+                                <td>${{ "%.2f"|format(expense.amount) }}</td>
+                                <td class="actions">
+                                    <form method="POST" action="?view=expenses" onsubmit="return confirm('Are you sure?');">
+                                        <input type="hidden" name="action" value="delete_expense">
+                                        <input type="hidden" name="id" value="{{ expense.id }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <span class="material-icons-sharp">delete</span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr><td colspan="4" style="text-align: center;">No expenses found.</td></tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+        {% if view == 'customers' %}
+            <div class="page-header">
+                <h1>Customers</h1>
+            </div>
+            <div class="card full-width">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Age</th>
+                            <th>Total Orders</th>
+                            <th>Total Spent</th>
+                            <th>Purchasing Power</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if customers %}
+                            {% set sorted_customers = customers | sort(attribute='total_spent', reverse=True) %}
+                            {% set max_spent = sorted_customers[0].total_spent if sorted_customers and sorted_customers[0].total_spent > 0 else 1 %}
+                            {% for customer in sorted_customers %}
+                                {% set power = (customer.total_spent / max_spent) * 100 %}
+                                {% if power > 70 %}
+                                    {% set power_label = 'High' %}
+                                {% elif power > 30 %}
+                                    {% set power_label = 'Medium' %}
+                                {% else %}
+                                    {% set power_label = 'Low' %}
+                                {% endif %}
+                                <tr>
+                                    <td>{{ customer.name }}</td>
+                                    <td>{{ customer.phone }}</td>
+                                    <td>{{ customer.age or '' }}</td>
+                                    <td>{{ customer.order_count }}</td>
+                                    <td>${{ "%.2f"|format(customer.total_spent) }}</td>
+                                    <td>{{ power_label }}</td>
+                                    <td class="actions">
+                                        <a href="?detail=customer&id={{ customer.id }}" class="btn btn-primary btn-sm">View</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr><td colspan="7" style="text-align: center;">No customers found.</td></tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </main>
+
+    <!-- Modals -->
+    <div id="addStockModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Stock</h2>
+                <button class="close-modal" data-modal-target="#addStockModal">&times;</button>
+            </div>
+            <form method="POST" action="?view=inventory">
+                <input type="hidden" name="action" value="add_stock">
+                <div class="form-group">
+                    <label for="stockName">Medicine Name</label>
+                    <input type="text" class="form-control" id="stockName" name="name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="stockQty">Quantity</label>
+                        <input type="number" class="form-control" id="stockQty" name="quantity" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="stockExpiry">Expiry Date</label>
+                        <input type="date" class="form-control" id="stockExpiry" name="expiry" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="stockCost">Purchase Cost (per unit)</label>
+                        <input type="number" class="form-control" id="stockCost" name="purchase_cost" required step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="stockPrice">Sale Price (per unit)</label>
+                        <input type="number" class="form-control" id="stockPrice" name="price_per_unit" required step="0.01" min="0">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Stock</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="addExpenseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Expense</h2>
+                <button class="close-modal" data-modal-target="#addExpenseModal">&times;</button>
+            </div>
+            <form method="POST" action="?view=expenses">
+                <input type="hidden" name="action" value="add_expense">
+                <div class="form-group">
+                    <label for="expenseName">Expense Name</label>
+                    <input type="text" class="form-control" id="expenseName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenseAmount">Amount</label>
+                    <input type="number" class="form-control" id="expenseAmount" name="amount" required step="0.01" min="0">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Expense</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="addInvoiceModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2>Create New Invoice</h2>
+                <button class="close-modal" data-modal-target="#addInvoiceModal">&times;</button>
+            </div>
+            <form method="POST" action="?view=invoices">
+                <input type="hidden" name="action" value="add_invoice">
+                <h3>Customer Details</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="custName">Customer Name</label>
+                        <input type="text" class="form-control" id="custName" name="customer_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="custPhone">Phone</label>
+                        <input type="tel" class="form-control" id="custPhone" name="customer_phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="custAge">Age</label>
+                        <input type="number" class="form-control" id="custAge" name="customer_age">
+                    </div>
+                </div>
+                <h3 style="margin-top: 1.5rem;">Items</h3>
+                <div id="invoice-items-container">
+                    <div class="invoice-item">
+                        <div class="form-group item-name">
+                            <label>Item Name</label>
+                            <select name="items[name][]" class="form-control" required>
+                                <option value="">Select Item</option>
+                                {% for item in inventory if item.quantity > 0 %}
+                                    <option value="{{ item.name }}">{{ item.name }} (In Stock: {{ item.quantity }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group item-qty">
+                            <label>Quantity</label>
+                            <input type="number" name="items[quantity][]" class="form-control" min="1" required>
+                        </div>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="removeInvoiceItem(this)">
+                            <span class="material-icons-sharp">remove</span>
+                        </button>
+                    </div>
+                </div>
+                <button type="button" id="add-invoice-item" class="btn btn-primary" style="margin-top: 1rem;">
+                    <span class="material-icons-sharp">add</span> Add Item
+                </button>
+                <h3 style="margin-top: 1.5rem;">Totals</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="invDiscount">Discount ($)</label>
+                        <input type="number" class="form-control" id="invDiscount" name="discount" value="0" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="invTax">Tax (%)</label>
+                        <input type="number" class="form-control" id="invTax" name="tax" value="0" step="0.01" min="0">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Create Invoice</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    {% if success %}
+        <div class="notification success show" id="notification-bar">{{ success | e }}</div>
+    {% endif %}
+    {% if error %}
+        <div class="notification error show" id="notification-bar">{{ error | e }}</div>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalTriggers = document.querySelectorAll('[data-modal-target]');
+            const modalCloses = document.querySelectorAll('.close-modal');
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    const modal = document.querySelector(trigger.dataset.modalTarget);
+                    if (modal) {
+                        modal.style.display = 'block';
+                    }
+                });
+            });
+            modalCloses.forEach(close => {
+                close.addEventListener('click', () => {
+                    const modal = document.querySelector(close.dataset.modalTarget);
+                    if (modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+            window.addEventListener('click', (event) => {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = 'none';
+                }
+            });
+            const notification = document.getElementById('notification-bar');
+            if (notification) {
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebar = document.getElementById('sidebar');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('open');
+                });
+            }
+            const addInvoiceItemBtn = document.getElementById('add-invoice-item');
+            if (addInvoiceItemBtn) {
+                addInvoiceItemBtn.addEventListener('click', addInvoiceItemRow);
+            }
+            {% if view == 'dashboard' %}
+            const salesChartCtx = document.getElementById('salesChart');
+            if (salesChartCtx) {
+                const salesData = {{ dashboard_data.sales_last_7_days | tojson }};
+                new Chart(salesChartCtx, {
+                    type: 'line',
+                    data: {
+                        labels: Object.keys(salesData),
+                        datasets: [{
+                            label: 'Sales',
+                            data: Object.values(salesData),
+                            backgroundColor: 'rgba(65, 90, 119, 0.1)',
+                            borderColor: 'rgba(65, 90, 119, 1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+            {% endif %}
+        });
+
+        const invoiceItemTemplate = `
+            <div class="invoice-item">
+                <div class="form-group item-name">
+                    <label>Item Name</label>
+                    <select name="items[name][]" class="form-control" required>
+                        <option value="">Select Item</option>
+                        {% for item in inventory if item.quantity > 0 %}
+                        <option value="{{ item.name }}">{{ item.name }} (In Stock: {{ item.quantity }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group item-qty">
+                    <label>Quantity</label>
+                    <input type="number" name="items[quantity][]" class="form-control" min="1" required>
+                </div>
+                <button type="button" class="btn btn-danger btn-sm" onclick="removeInvoiceItem(this)">
+                    <span class="material-icons-sharp">remove</span>
+                </button>
+            </div>`;
+
+        function addInvoiceItemRow() {
+            const container = document.getElementById('invoice-items-container');
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = invoiceItemTemplate.trim();
+            container.appendChild(tempDiv.firstChild);
+        }
+
+        function removeInvoiceItem(button) {
+            const itemRow = button.closest('.invoice-item');
+            const container = document.getElementById('invoice-items-container');
+            if (container.children.length > 1) {
+                itemRow.remove();
+            } else {
+                alert("You must have at least one item in the invoice.");
+            }
+        }
+    </script>
+</body>
+</html>

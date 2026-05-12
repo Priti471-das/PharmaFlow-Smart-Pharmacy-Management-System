@@ -1,0 +1,310 @@
+[
+    {
+        "id": "inv_690c7be0ac646",
+        "date": "2025-11-06",
+        "customer_name": "Vihaan",
+        "customer_phone": "1749812748",
+        "customer_age": 23,
+        "items": [
+            {
+                "name": "Furosemide",
+                "quantity": 4,
+                "price_per_unit": 5,
+                "total": 20
+            },
+            {
+                "name": "Cetirizine",
+                "quantity": 3,
+                "price_per_unit": 6,
+                "total": 18
+            }
+        ],
+        "sub_total": 38,
+        "discount": 10,
+        "tax": 10,
+        "tax_amount": 2.8,
+        "grand_total": 30.8,
+        "total_cost": 11.7,
+        "profit": 19.1
+    },
+    {
+        "id": "inv_690c7be0ac647",
+        "date": "2025-11-05",
+        "customer_name": "Aarav",
+        "customer_phone": "1749812749",
+        "customer_age": 35,
+        "items": [
+            {
+                "name": "Amoxicillin",
+                "quantity": 2,
+                "price_per_unit": 12,
+                "total": 24
+            },
+            {
+                "name": "Omeprazole",
+                "quantity": 1,
+                "price_per_unit": 14,
+                "total": 14
+            }
+        ],
+        "sub_total": 38,
+        "discount": 5,
+        "tax": 10,
+        "tax_amount": 3.8,
+        "grand_total": 36.8,
+        "total_cost": 13.2,
+        "profit": 23.6
+    },
+    {
+        "id": "inv_690c7be0ac648",
+        "date": "2025-11-04",
+        "customer_name": "Nia",
+        "customer_phone": "1749812750",
+        "customer_age": 28,
+        "items": [
+            {
+                "name": "Losartan",
+                "quantity": 5,
+                "price_per_unit": 15,
+                "total": 75
+            },
+            {
+                "name": "Ibuprofen",
+                "quantity": 2,
+                "price_per_unit": 8,
+                "total": 16
+            }
+        ],
+        "sub_total": 91,
+        "discount": 5,
+        "tax": 10,
+        "tax_amount": 4.4,
+        "grand_total": 90.4,
+        "total_cost": 28.5,
+        "profit": 61.9
+    },
+    {
+        "id": "inv_690c7be0ac649",
+        "date": "2025-11-03",
+        "customer_name": "Rehaan",
+        "customer_phone": "1749812751",
+        "customer_age": 40,
+        "items": [
+            {
+                "name": "Metformin",
+                "quantity": 3,
+                "price_per_unit": 12,
+                "total": 36
+            },
+            {
+                "name": "Gabapentin",
+                "quantity": 1,
+                "price_per_unit": 10,
+                "total": 10
+            }
+        ],
+        "sub_total": 46,
+        "discount": 0,
+        "tax": 10,
+        "tax_amount": 4.6,
+        "grand_total": 50.6,
+        "total_cost": 15,
+        "profit": 35.6
+    },
+    {
+        "id": "inv_690c7be0ac650",
+        "date": "2025-11-02",
+        "customer_name": "Maya",
+        "customer_phone": "1749812752",
+        "customer_age": 25,
+        "items": [
+            {
+                "name": "Zolpidem",
+                "quantity": 2,
+                "price_per_unit": 15,
+                "total": 30
+            },
+            {
+                "name": "Levothyroxine",
+                "quantity": 1,
+                "price_per_unit": 22,
+                "total": 22
+            }
+        ],
+        "sub_total": 52,
+        "discount": 5,
+        "tax": 10,
+        "tax_amount": 4.2,
+        "grand_total": 51.2,
+        "total_cost": 18.5,
+        "profit": 32.7
+    },
+    {
+        "id": "inv_690c7be0ac651",
+        "date": "2025-11-01",
+        "customer_name": "Saanvi",
+        "customer_phone": "1749812753",
+        "customer_age": 30,
+        "items": [
+            {
+                "name": "Furosemide",
+                "quantity": 6,
+                "price_per_unit": 5,
+                "total": 30
+            },
+            {
+                "name": "Doxycycline",
+                "quantity": 3,
+                "price_per_unit": 18,
+                "total": 54
+            }
+        ],
+        "sub_total": 84,
+        "discount": 10,
+        "tax": 10,
+        "tax_amount": 6.8,
+        "grand_total": 80.8,
+        "total_cost": 27.6,
+        "profit": 53.2
+    },
+    {
+        "id": "inv_690c7be0ac652",
+        "date": "2025-10-30",
+        "customer_name": "Siddharth",
+        "customer_phone": "1749812754",
+        "customer_age": 33,
+        "items": [
+            {
+                "name": "Omeprazole",
+                "quantity": 4,
+                "price_per_unit": 14,
+                "total": 56
+            },
+            {
+                "name": "Ibuprofen",
+                "quantity": 2,
+                "price_per_unit": 8,
+                "total": 16
+            }
+        ],
+        "sub_total": 72,
+        "discount": 5,
+        "tax": 10,
+        "tax_amount": 5.4,
+        "grand_total": 72.4,
+        "total_cost": 21.2,
+        "profit": 51.2
+    },
+    {
+        "id": "inv_690c7be0ac653",
+        "date": "2025-10-29",
+        "customer_name": "Arjun",
+        "customer_phone": "1749812755",
+        "customer_age": 27,
+        "items": [
+            {
+                "name": "Salbutamol",
+                "quantity": 3,
+                "price_per_unit": 7,
+                "total": 21
+            },
+            {
+                "name": "Cetirizine",
+                "quantity": 2,
+                "price_per_unit": 6,
+                "total": 12
+            }
+        ],
+        "sub_total": 33,
+        "discount": 5,
+        "tax": 10,
+        "tax_amount": 2.9,
+        "grand_total": 30.9,
+        "total_cost": 8.4,
+        "profit": 22.5
+    },
+    {
+        "id": "inv_690c7be0ac654",
+        "date": "2025-10-28",
+        "customer_name": "Aditi",
+        "customer_phone": "1749812756",
+        "customer_age": 45,
+        "items": [
+            {
+                "name": "Azithromycin",
+                "quantity": 4,
+                "price_per_unit": 13,
+                "total": 52
+            },
+            {
+                "name": "Lisinopril",
+                "quantity": 2,
+                "price_per_unit": 7,
+                "total": 14
+            }
+        ],
+        "sub_total": 66,
+        "discount": 5,
+        "tax": 10,
+        "tax_amount": 5.1,
+        "grand_total": 66.1,
+        "total_cost": 19.4,
+        "profit": 46.7
+    },
+    {
+        "id": "inv_690c7be0ac655",
+        "date": "2025-10-27",
+        "customer_name": "Kavya",
+        "customer_phone": "1749812757",
+        "customer_age": 38,
+        "items": [
+            {
+                "name": "Prednisolone",
+                "quantity": 3,
+                "price_per_unit": 14,
+                "total": 42
+            },
+            {
+                "name": "Clopidogrel",
+                "quantity": 1,
+                "price_per_unit": 12,
+                "total": 12
+            }
+        ],
+        "sub_total": 54,
+        "discount": 5,
+        "tax": 10,
+        "tax_amount": 4.6,
+        "grand_total": 53.6,
+        "total_cost": 15.3,
+        "profit": 38.3
+    },
+    {
+        "id": "inv_690c7be0ac656",
+        "date": "2025-10-26",
+        "customer_name": "Ishaan",
+        "customer_phone": "1749812758",
+        "customer_age": 22,
+        "items": [
+            {
+                "name": "Metformin",
+                "quantity": 4,
+                "price_per_unit": 12,
+                "total": 48
+            },
+            {
+                "name": "Warfarin",
+                "quantity": 3,
+                "price_per_unit": 16,
+                "total": 48
+            }
+        ],
+        "sub_total": 96,
+        "discount": 10,
+        "tax": 10,
+        "tax_amount": 7.6,
+        "grand_total": 93.6,
+        "total_cost": 33.6,
+        "profit": 60
+    }
+]

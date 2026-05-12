@@ -1,0 +1,123 @@
+[
+    {
+        "id": "cust_690c7be0ac927",
+        "name": "Vihaan",
+        "phone": "1749812748",
+        "age": 23,
+        "total_spent": 30.8,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac646"
+        ]
+    },
+    {
+        "id": "cust_690c7be0ac928",
+        "name": "Aarav",
+        "phone": "1749812749",
+        "age": 35,
+        "total_spent": 36.8,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac647"
+        ]
+    },
+    {
+        "id": "cust_690c7be0ac929",
+        "name": "Nia",
+        "phone": "1749812750",
+        "age": 28,
+        "total_spent": 90.4,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac648"
+        ]
+    },
+    {
+        "id": "cust_690c7be0ac930",
+        "name": "Rehaan",
+        "phone": "1749812751",
+        "age": 40,
+        "total_spent": 50.6,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac649"
+        ]
+    },
+    {
+        "id": "cust_690c7be0ac931",
+        "name": "Maya",
+        "phone": "1749812752",
+        "age": 25,
+        "total_spent": 51.2,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac650"
+        ]
+    },
+    {
+        "id": "cust_690c7be0ac932",
+        "name": "Saanvi",
+        "phone": "1749812753",
+        "age": 30,
+        "total_spent": 80.8,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac651"
+        ]
+    },
+    {
+        "id": "cust_690c7be0ac933",
+        "name": "Siddharth",
+        "phone": "1749812754",
+        "age": 33,
+        "total_spent": 72.4,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac652"
+        ]
+    },
+    {
+        "id": "cust_690c7be0ac934",
+        "name": "Arjun",
+        "phone": "1749812755",
+        "age": 27,
+        "total_spent": 30.9,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac653"
+        ]
+    },
+    {
+        "id": "cust_690c7be0ac935",
+        "name": "Aditi",
+        "phone": "1749812756",
+        "age": 45,
+        "total_spent": 66.1,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac654"
+        ]
+    },
+    {
+        "id": "cust_690c7be0ac936",
+        "name": "Kavya",
+        "phone": "1749812757",
+        "age": 38,
+        "total_spent": 53.6,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac655"
+        ]
+    },
+    {
+        "id": "cust_690c7be0ac937",
+        "name": "Ishaan",
+        "phone": "1749812758",
+        "age": 22,
+        "total_spent": 93.6,
+        "order_count": 1,
+        "history": [
+            "inv_690c7be0ac656"
+        ]
+    }
+]

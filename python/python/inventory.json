@@ -1,0 +1,234 @@
+[
+    {
+        "id": "stock_690c7963ec0b1",
+        "name": "Paracetamol",
+        "quantity": 10000,
+        "purchase_cost": 1,
+        "price_per_unit": 5,
+        "expiry": "2025-11-26"
+    },
+    {
+        "id": "stock_690c7963ec0b2",
+        "name": "Ibuprofen",
+        "quantity": 8000,
+        "purchase_cost": 2,
+        "price_per_unit": 8,
+        "expiry": "2026-01-15"
+    },
+    {
+        "id": "stock_690c7963ec0b3",
+        "name": "Amoxicillin",
+        "quantity": 12000,
+        "purchase_cost": 3,
+        "price_per_unit": 10,
+        "expiry": "2025-12-31"
+    },
+    {
+        "id": "stock_690c7963ec0b4",
+        "name": "Cetirizine",
+        "quantity": 14997,
+        "purchase_cost": 1.5,
+        "price_per_unit": 6,
+        "expiry": "2026-03-10"
+    },
+    {
+        "id": "stock_690c7963ec0b5",
+        "name": "Losartan",
+        "quantity": 5000,
+        "purchase_cost": 4,
+        "price_per_unit": 15,
+        "expiry": "2025-09-10"
+    },
+    {
+        "id": "stock_690c7963ec0b6",
+        "name": "Amlodipine",
+        "quantity": 7000,
+        "purchase_cost": 2.5,
+        "price_per_unit": 10,
+        "expiry": "2025-07-05"
+    },
+    {
+        "id": "stock_690c7963ec0b7",
+        "name": "Metformin",
+        "quantity": 10000,
+        "purchase_cost": 3,
+        "price_per_unit": 12,
+        "expiry": "2026-06-25"
+    },
+    {
+        "id": "stock_690c7963ec0b8",
+        "name": "Omeprazole",
+        "quantity": 8000,
+        "purchase_cost": 4,
+        "price_per_unit": 14,
+        "expiry": "2025-11-10"
+    },
+    {
+        "id": "stock_690c7963ec0b9",
+        "name": "Lisinopril",
+        "quantity": 6000,
+        "purchase_cost": 2.2,
+        "price_per_unit": 7,
+        "expiry": "2025-08-15"
+    },
+    {
+        "id": "stock_690c7963ec0c0",
+        "name": "Furosemide",
+        "quantity": 5496,
+        "purchase_cost": 1.8,
+        "price_per_unit": 5,
+        "expiry": "2026-04-12"
+    },
+    {
+        "id": "stock_690c7963ec0c1",
+        "name": "Hydrochlorothiazide",
+        "quantity": 6500,
+        "purchase_cost": 2.7,
+        "price_per_unit": 8,
+        "expiry": "2025-12-20"
+    },
+    {
+        "id": "stock_690c7963ec0c2",
+        "name": "Chloroquine",
+        "quantity": 4000,
+        "purchase_cost": 3.5,
+        "price_per_unit": 9,
+        "expiry": "2025-07-01"
+    },
+    {
+        "id": "stock_690c7963ec0c3",
+        "name": "Azithromycin",
+        "quantity": 9000,
+        "purchase_cost": 4.5,
+        "price_per_unit": 13,
+        "expiry": "2026-02-28"
+    },
+    {
+        "id": "stock_690c7963ec0c4",
+        "name": "Doxycycline",
+        "quantity": 10000,
+        "purchase_cost": 5,
+        "price_per_unit": 18,
+        "expiry": "2025-10-30"
+    },
+    {
+        "id": "stock_690c7963ec0c5",
+        "name": "Prednisolone",
+        "quantity": 7500,
+        "purchase_cost": 3.8,
+        "price_per_unit": 14,
+        "expiry": "2026-05-05"
+    },
+    {
+        "id": "stock_690c7963ec0c6",
+        "name": "Salbutamol",
+        "quantity": 11000,
+        "purchase_cost": 1.2,
+        "price_per_unit": 7,
+        "expiry": "2025-11-18"
+    },
+    {
+        "id": "stock_690c7963ec0c7",
+        "name": "Warfarin",
+        "quantity": 9000,
+        "purchase_cost": 3,
+        "price_per_unit": 16,
+        "expiry": "2025-09-30"
+    },
+    {
+        "id": "stock_690c7963ec0c8",
+        "name": "Levothyroxine",
+        "quantity": 5000,
+        "purchase_cost": 5,
+        "price_per_unit": 22,
+        "expiry": "2026-01-10"
+    },
+    {
+        "id": "stock_690c7963ec0c9",
+        "name": "Calcium Carbonate",
+        "quantity": 7000,
+        "purchase_cost": 0.8,
+        "price_per_unit": 3,
+        "expiry": "2026-07-20"
+    },
+    {
+        "id": "stock_690c7963ec0d0",
+        "name": "Vitamin D3",
+        "quantity": 12000,
+        "purchase_cost": 1.2,
+        "price_per_unit": 4,
+        "expiry": "2026-02-18"
+    },
+    {
+        "id": "stock_690c7963ec0d1",
+        "name": "Gabapentin",
+        "quantity": 6500,
+        "purchase_cost": 2.5,
+        "price_per_unit": 10,
+        "expiry": "2025-12-01"
+    },
+    {
+        "id": "stock_690c7963ec0d2",
+        "name": "Clopidogrel",
+        "quantity": 7000,
+        "purchase_cost": 3.2,
+        "price_per_unit": 12,
+        "expiry": "2025-06-15"
+    },
+    {
+        "id": "stock_690c7963ec0d3",
+        "name": "Fluoxetine",
+        "quantity": 8500,
+        "purchase_cost": 1.8,
+        "price_per_unit": 6,
+        "expiry": "2026-05-30"
+    },
+    {
+        "id": "stock_690c7963ec0d4",
+        "name": "Lorazepam",
+        "quantity": 6000,
+        "purchase_cost": 2.5,
+        "price_per_unit": 11,
+        "expiry": "2025-10-01"
+    },
+    {
+        "id": "stock_690c7963ec0d5",
+        "name": "Paroxetine",
+        "quantity": 4500,
+        "purchase_cost": 3,
+        "price_per_unit": 9,
+        "expiry": "2025-11-12"
+    },
+    {
+        "id": "stock_690c7963ec0d6",
+        "name": "Tamsulosin",
+        "quantity": 8000,
+        "purchase_cost": 4,
+        "price_per_unit": 13,
+        "expiry": "2025-07-25"
+    },
+    {
+        "id": "stock_690c7963ec0d7",
+        "name": "Zolpidem",
+        "quantity": 6000,
+        "purchase_cost": 3.5,
+        "price_per_unit": 15,
+        "expiry": "2026-01-05"
+    },
+    {
+        "id": "stock_690c7963ec0d8",
+        "name": "Methotrexate",
+        "quantity": 3000,
+        "purchase_cost": 5.5,
+        "price_per_unit": 18,
+        "expiry": "2026-03-01"
+    },
+    {
+        "id": "stock_690c7963ec0d9",
+        "name": "Pregabalin",
+        "quantity": 10000,
+        "purchase_cost": 4,
+        "price_per_unit": 14,
+        "expiry": "2026-04-15"
+    }
+]
